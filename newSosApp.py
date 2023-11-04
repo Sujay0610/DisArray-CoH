@@ -102,7 +102,6 @@ def sos():
     print(longitude)
     webbrowser.open(f'https://maps.google.com/?q={latitude},{longitude}')
     current_time = datetime.datetime.now()
-    kit.sendwhatmsg_instantly(phone_no='+91 6362678349',
-                              message=f'This is an SOS from Suhas, this is his latest location https://maps.google.com/?q={latitude},{longitude} ')
+    kit.sendwhatmsg_instantly(phone_no='+91 6362678349',message=f'This is an SOS from Suhas, this is his latest location https://maps.google.com/?q={latitude},{longitude} ')
 
 get_email()
