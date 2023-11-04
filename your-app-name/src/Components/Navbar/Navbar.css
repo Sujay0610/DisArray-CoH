@@ -1,0 +1,14 @@
+.navbar{
+    display:flex;
+    justify-content:space-around;
+    padding:16px;
+    box-shadow:0 1px 3px -2px black;
+
+}
+.nav-logo p{
+    color:black;
+    font-size:25px;
+    font-weight:600;
+    padding:0px 0px 0px 80px;
+    justify-content: center;
+}
