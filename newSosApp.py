@@ -95,3 +95,4 @@ def sos():
     kit.sendwhatmsg_instantly(phone_no='+91 6362678349',message=f'This is an SOS from Suhas, this is his latest location https://maps.google.com/?q={latitude},{longitude} ')
 
 get_email()
+ 
