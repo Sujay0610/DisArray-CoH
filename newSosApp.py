@@ -1,6 +1,6 @@
 import imaplib
-import email
 import smtplib
+import email
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
@@ -11,7 +11,7 @@ import threading
 import time
 import os
 import datetime
-import yagmail as email
+import yagmail
 import pywhatkit as kit
 
 def get_email():
@@ -64,28 +64,18 @@ def get_email():
                 if 'SOS' in instruct:
                     sos()
 
-
 def send_confirmation(process, body, attachment=None):
     sender_email = 'cleversquadtech@gmail.com'
-    sender_password = 'pwejkovsibyxaqfe'
     receiver_email = 'boodelyboo1234@gmail.com'
 
-    msg = MIMEMultipart()
-    msg['From'] = sender_email
-    msg['To'] = receiver_email
-    msg['Subject'] = f"{process} is running."
+    yag = yagmail.SMTP(sender_email, 'pwejkovsibyxaqfe')
 
     if attachment:
-        msg.attach(MIMEText(body, 'plain'))
-        img_data = open(attachment, 'rb').read()
-        image = MIMEImage(img_data, name=os.path.basename(attachment))
-        msg.attach(image)
+        yag.send(receiver_email, f"{process} is running.", [body, attachment])
     else:
-        msg.attach(MIMEText(body, 'plain'))
+        yag.send(receiver_email, f"{process} is running.", body)
 
-    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
-        server.login(sender_email, sender_password)
-        server.sendmail(sender_email, receiver_email, msg.as_string())
+    yag.close()
 
 def sos():
     import requests
