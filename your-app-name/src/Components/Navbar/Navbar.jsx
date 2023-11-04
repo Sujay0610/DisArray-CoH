@@ -5,7 +5,9 @@ const Navbar = () => {
     return (
         <div className='navbar'>
             <div className='nav-logo'>
-            <p>DisArray</p>
+            <p>[ DisArray ]</p>
+            <div className="navpic">
+            </div>
             </div>
         </div>
     );
