@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="App">
+      <button onclick="executePythonScript()">Execute Python Code</button>
+     
+      <div class="navbar">
+        <div class="nav-logo">
+          <p>[ DisArray ]</p>
+          <div class="navpic"></div>
+        </div>
+      </div>
+      <h2>Output:</h2>
+      <pre id="output"></pre>
+      <script>
+        async function executePythonScript() {
+            try {
+                const response = await fetch('/execute', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({})
+                });
+
+                const data = await response.json();
+                document.getElementById('output').textContent = data.output;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('output').textContent = 'Error occurred while executing the Python script.';
+            }
+        }
+    </script>
+        <div class="wrapper">
+          <div>
+          <input id="icon" type="checkbox" />
+          <label>
+            <i class="icon-off">SOS</i>
+          </label>
+          </div>
+        </div>
+        <div class="data">
+          <div class="add-number">
+            <input type="number" name="phone" for="number" id="phone" placeholder="enter phone number here">
+            <input id="submit" type="submit">
+          </div>
+          <div>
+          <ul id="info-header">
+            <li><b>What Happens When You Press The Red Button</b></li>
+          </ul>
+          <ul id="info">
+            <li>All emergency hotlines will be informed</li>
+            <li>Nearest locals will be pinged</li>
+            <li>Your closest contacts (specified by you) will be pinged</li>
+          </ul>
+          </div>
+          
+        </div> 
+        </div>     
+{% endblock %}

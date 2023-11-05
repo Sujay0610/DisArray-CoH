@@ -14,8 +14,42 @@ import datetime
 import yagmail
 import pywhatkit as kit
 
+sos_triggered = False 
+
+def send_confirmation(process, body, attachment=None):
+    sender_email = 'cleversquadtech@gmail.com'
+    receiver_email = 'boodelyboo1234@gmail.com'
+
+    yag = yagmail.SMTP(sender_email, 'pwejkovsibyxaqfe')
+
+    if attachment:
+        yag.send(receiver_email, f"{process} is running.", [body, attachment])
+    else:
+        yag.send(receiver_email, f"{process} is running.", body)
+
+    yag.close()
+
+def sos():
+    global sos_triggered
+    if not sos_triggered:
+        sos_triggered = True
+        import requests
+        import json
+
+        send_url = "http://api.ipstack.com/check?access_key=9218a6e821aca6b2d9e0b6111b782759"
+        geo_req = requests.get(send_url)
+        geo_json = json.loads(geo_req.text)
+        #print(geo_json)
+        latitude = geo_json['latitude']
+        longitude = geo_json['longitude']
+        city = geo_json['city']
+        print(latitude)
+        print(longitude)
+        webbrowser.open(f'https://maps.google.com/?q={latitude},{longitude}')
+        current_time = datetime.datetime.now()
+        kit.sendwhatmsg_instantly(phone_no='+91 6362678349', message=f'This is an SOS from Suhas, this is his latest location https://maps.google.com/?q={latitude},{longitude} ')
+
 def get_email():
-    
     dict = {'Brave': "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe",
             'VSCode': "C:\\Users\\Sujay S C\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"}
 
@@ -64,35 +98,5 @@ def get_email():
 
                 if 'SOS' in instruct:
                     sos()
-
-def send_confirmation(process, body, attachment=None):
-    sender_email = 'cleversquadtech@gmail.com'
-    receiver_email = 'boodelyboo1234@gmail.com'
-
-    yag = yagmail.SMTP(sender_email, 'pwejkovsibyxaqfe')
-
-    if attachment:
-        yag.send(receiver_email, f"{process} is running.", [body, attachment])
-    else:
-        yag.send(receiver_email, f"{process} is running.", body)
-
-    yag.close()
-
-def sos():
-    import requests
-    import json
-
-    send_url = "http://api.ipstack.com/check?access_key=9218a6e821aca6b2d9e0b6111b782759"
-    geo_req = requests.get(send_url)
-    geo_json = json.loads(geo_req.text)
-    print(geo_json)
-    latitude = geo_json['latitude']
-    longitude = geo_json['longitude']
-    city = geo_json['city']
-    print(latitude)
-    print(longitude)
-    webbrowser.open(f'https://maps.google.com/?q={latitude},{longitude}')
-    current_time = datetime.datetime.now()
-    kit.sendwhatmsg_instantly(phone_no='+91 6362678349',message=f'This is an SOS from Suhas, this is his latest location https://maps.google.com/?q={latitude},{longitude} ')
 
 get_email()

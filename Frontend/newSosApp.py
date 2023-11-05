@@ -15,7 +15,6 @@ import yagmail
 import pywhatkit as kit
 
 def get_email():
-    
     dict = {'Brave': "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe",
             'VSCode': "C:\\Users\\Sujay S C\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"}
 
@@ -28,6 +27,7 @@ def get_email():
     for msg_id in messages[0].split():
         _, msg_data = server.fetch(msg_id, '(RFC822)')
         msg = email.message_from_bytes(msg_data[0][1])
+        
 
         if msg.is_multipart():
             for part in msg.walk():
@@ -96,3 +96,4 @@ def sos():
     kit.sendwhatmsg_instantly(phone_no='+91 6362678349',message=f'This is an SOS from Suhas, this is his latest location https://maps.google.com/?q={latitude},{longitude} ')
 
 get_email()
+ 
