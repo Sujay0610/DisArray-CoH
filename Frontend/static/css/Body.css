@@ -8,7 +8,7 @@ html {
 
 body {
   background: #cdcfca;
-  background: linear-gradient(#fafafa, rgb(136, 8, 8));
+  background: linear-gradient(#000000, rgb(136, 8, 8));
   height: 100%;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
