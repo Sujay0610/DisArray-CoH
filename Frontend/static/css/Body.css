@@ -97,6 +97,19 @@ label:before {
   opacity: 0;
   z-index: 100;
   position: absolute;
+  
+}
+#exec{
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  opacity: 0;
+  /*margin-bottom: 1000px;
+  margin-left: 50px;*/
+  left: 10%;
+  top: 10%;
+  z-index: 101;
+  display: block;
   cursor: pointer;
 }
 .data{
@@ -119,4 +132,8 @@ label:before {
 }
 #info-header{
   list-style-type: none;
+}
+
+.but{
+  opacity:0;
 }

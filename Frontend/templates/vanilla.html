@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block body %}
     <div class="App">
-      <button onclick="executePythonScript()">Execute Python Code</button>
+      <!--button onclick="executePythonScript()">Execute Python Code</button -->
      
       <div class="navbar">
         <div class="nav-logo">
@@ -9,34 +9,16 @@
           <div class="navpic"></div>
         </div>
       </div>
-      <h2>Output:</h2>
-      <pre id="output"></pre>
-      <script>
-        async function executePythonScript() {
-            try {
-                const response = await fetch('/execute', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({})
-                });
-
-                const data = await response.json();
-                document.getElementById('output').textContent = data.output;
-            } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('output').textContent = 'Error occurred while executing the Python script.';
-            }
-        }
-    </script>
+       <h2>Output:</h2>
+    <pre id="output"></pre>
         <div class="wrapper">
-          <div>
+          
           <input id="icon" type="checkbox" />
           <label>
             <i class="icon-off">SOS</i>
           </label>
-          </div>
+          <button id="exec" onclick="executePythonScript()">Execute Python Code</button>
+          
         </div>
         <div class="data">
           <div class="add-number">
@@ -53,7 +35,25 @@
             <li>Your closest contacts (specified by you) will be pinged</li>
           </ul>
           </div>
-          
+          <script>
+            async function executePythonScript() {
+                try {
+                    const response = await fetch('/execute', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({})
+                    });
+    
+                    const data = await response.json();
+                    document.getElementById('output').textContent = data.output;
+                } catch (error) {
+                    console.error('Error:', error);
+                    document.getElementById('output').textContent = 'Error occurred while executing the Python script.';
+                }
+            }
+        </script>
         </div> 
         </div>     
 {% endblock %}
